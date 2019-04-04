@@ -48,5 +48,6 @@ void encryptRotationCipher(char message[], int key)
         message [i] = letter;
     }
     
+    
     printf ("%s", message);
 }
