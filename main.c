@@ -9,45 +9,84 @@ void decryptSubCipher(char cipher[], char substition[]);
 void decryptRotationCipherAdv(char cipher[]);
 void decryptSubCipherAdv(char cipher[]);
 
-int main()
-{
+int main() {
     
-    char message[] = "yeet";
-    int key = 0;
-    
-    encryptRotationCipher(message, key);
+    char message[] = "ZFFU";
+    int key = 1;
+    //encryptRotationCipher(message, key);
+    //decryptRotationCipher(message, key);
     
     return 0;
 }
 
-void encryptRotationCipher(char message[], int key) 
-{
+void encryptRotationCipher(char message[], int key) {
     int i;
     char letter;
     
-    for (i = 0 ; message[i] != '\0' ; i++)
-    {
+    while (key < 0) {
+        key += 26;
+    }   while (key >= 0) {
+        key -= 26;
+    }
+        
+    for (i = 0 ; message[i] != '\0' ; i++) {
+        
         letter = message[i];
         
-        if (letter >= 'a' || letter <= 'z')
-        {
-            letter -= 32;
-        }   else if (letter < 'A' || letter > 'Z') 
-        {
-            printf("Please enter only alphabetical characters");
-            break;
+        while (key < 0) {
+            key += 26;
         }
         
-        letter = (letter + key);
+        if (letter >= 'a' && letter <= 'z') {
+            letter -= 32;
+            letter += key;
+        }   else if (letter == ' ') {
+            //do nothing
+        }   else if (letter > 'A' || letter < 'Z') {
+            letter += key;
+        }   else {
+            printf("Please enter only alphabetical characters");
+        }
         
-        if (letter > 'Z')
-        {
+        if (letter > 'Z') {
             letter = letter - 'Z' + 'A' - 1;
         }
         
         message [i] = letter;
+        printf("%s\n", message);
+    }
+}
+
+void decryptRotationCipher (char cipher[], int key) {
+    int i;
+    char letter;
+    
+    while (key < 0) {
+        key += 26;
+    } while (key >= 26) {
+        key -= 26;
     }
     
-    
-    printf ("%s", message);
+    for (i = 0 ; cipher[i] != '\0' ; i++) {
+        
+        letter = cipher[i];
+        
+        if (letter >= 'a' && letter <= 'z') {
+            letter -= 32;
+            letter -= key;
+        } else if (letter == ' ') {
+            //do nothing
+        } else if (letter > 'A' || letter < 'Z') {
+            letter -= key;
+        } else {
+            printf("Please enter only alphabetical characters");
+        }
+        
+        if (letter < 'A') {
+            letter = letter + 'Z' - 'A' + 1;
+        }
+        
+        cipher[i] = letter;
+        printf("%s\n", cipher);
+    }
 }
