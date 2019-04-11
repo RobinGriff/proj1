@@ -13,8 +13,8 @@ int main() {
     
     char message[] = "ZFFU";
     int key = 1;
-    //encryptRotationCipher(message, key);
-    //decryptRotationCipher(message, key);
+    encryptRotationCipher(message, key);
+decryptRotationCipher(message, key);
     
     return 0;
 }
@@ -89,4 +89,8 @@ void decryptRotationCipher (char cipher[], int key) {
         cipher[i] = letter;
         printf("%s\n", cipher);
     }
+}
+
+void encryptSubCipher (char message[], char substitution) {
+    //yes
 }
