@@ -3,8 +3,8 @@
 void encryptRotationCipher(char message[], int key);
 void decryptRotationCipher(char cipher[], int key);
 
-void encryptSubCipher(char message[], char substition[]);
-void decryptSubCipher(char cipher[], char substition[]);
+void encryptSubCipher(char message[], char substitution[]);
+void decryptSubCipher(char cipher[], char substitution[]);
 
 void decryptRotationCipherAdv(char cipher[]);
 void decryptSubCipherAdv(char cipher[]);
@@ -14,7 +14,7 @@ int main() {
     char message[] = "ZFFU";
     int key = 1;
     encryptRotationCipher(message, key);
-decryptRotationCipher(message, key);
+    decryptRotationCipher(message, key);
     
     return 0;
 }
@@ -91,6 +91,12 @@ void decryptRotationCipher (char cipher[], int key) {
     }
 }
 
-void encryptSubCipher (char message[], char substitution) {
-    //yes
+void encryptSubCipher (char message[], char key[]) {
+    char alphabet[] = 'ABCDEFGHIJKLMNOPQRSTUVWXZ';
+    int i;
+    char letter;
+    
+    for (i = 0 ; message[i] != '\0' ; i++) {
+        
+    }
 }
