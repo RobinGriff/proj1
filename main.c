@@ -92,11 +92,17 @@ void decryptRotationCipher (char cipher[], int key) {
 }
 
 void encryptSubCipher (char message[], char key[]) {
-    char alphabet[] = 'ABCDEFGHIJKLMNOPQRSTUVWXZ';
+    char alphabet[] = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    char key[] =      'BADCFEHGJILKNMPOSQRVTUYZXW'
     int i;
     char letter;
     
     for (i = 0 ; message[i] != '\0' ; i++) {
         
+        letter = message[i];
+        
+        if (letter >= 'a' && letter <= 'z') {
+            letter -= 32;
+        }
     }
 }
