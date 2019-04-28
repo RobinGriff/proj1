@@ -12,66 +12,50 @@ void decryptSubCipherAdv(char cipher[]);
 
 int main() {
     
-    char message[] = "THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG";
+//    char message[] = "THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG";
 //    char key[] = "BADCFEHGJILKNMPOSQRVTUYZXW";
-//    char cipher[] = "VGF STJDL AQPYM EPZ ITNOR PUFQ VGF KBWX CPH";
-    
+    char cipher[] = "VGF STJDL AQPYM EPZ ITNOR PUFQ VGF KBWX CPH";
     int key = 3;
     
 //    decryptSubCipher(cipher, key);
     
-//    char message[] = "ZFFU";
-//    char key[] = "WEET";
-    
 //    encryptSubCipher(message, key);
-//    int key = 1;
-    encryptRotationCipher(message, key);
-//    decryptRotationCipher(message, key);
+//    encryptRotationCipher(message, key);
+    decryptRotationCipher(cipher, key);
     
     return 0;
 }
 
 void encryptRotationCipher(char message[], int key) {
     int i;
-    char letter;
     
-    while (key < -26) {
+    while (key < 0) {
         key += 26;
-    }   while (key >= 26) {
+    } while (key >= 26) {
         key -= 26;
     }
-        
+    
     for (i = 0 ; message[i] != '\0' ; i++) {
         
-        letter = message[i];
-        
-        while (key < 0) {
-            key += 26;
+        if (message[i] >= 'a' && message[i] <= 'z') {
+            message[i] -= 32;
         }
         
-        if (letter >= 'a' && letter <= 'z') {
-            letter -= 32;
-            letter += key;
-        }   else if (letter == ' ') {
-            //do nothing
-        }   else if (letter > 'A' || letter < 'Z') {
-            letter += key;
-        }   else {
-            printf("Please enter only alphabetical characters");
+        if (message[i] >= 'A' && message[i] <= 'Z') {
+            message[i] += key;
+            if (message[i] > 'Z') {
+                message[i] = message[i] - 'Z' + 'A' - 1;
+            }
+        } else {
+            // do nothing
         }
-        
-        if (letter > 'Z') {
-            letter = letter - 'Z' + 'A' - 1;
-        }
-        
-        message [i] = letter;
-        printf("%s\n", message);
     }
+    
+    printf("%s", message);
 }
 
 void decryptRotationCipher (char cipher[], int key) {
     int i;
-    char letter;
     
     while (key < 0) {
         key += 26;
@@ -81,26 +65,20 @@ void decryptRotationCipher (char cipher[], int key) {
     
     for (i = 0 ; cipher[i] != '\0' ; i++) {
         
-        letter = cipher[i];
+        if (cipher[i] >= 'a' && cipher[i] <= 'z') {
+            cipher[i] -= 32;
+        } 
         
-        if (letter >= 'a' && letter <= 'z') {
-            letter -= 32;
-            letter -= key;
-        } else if (letter == ' ') {
-            //do nothing
-        } else if (letter > 'A' || letter < 'Z') {
-            letter -= key;
+        if (cipher[i] >= 'A' && cipher[i] <= 'Z') {
+            cipher[i] -= key;
+            if (cipher[i] < 'A') {
+                cipher[i] = cipher[i] + 'Z' - 'A' + 1;
+            }
         } else {
-            printf("Please enter only alphabetical characters");
+            //do nothing
         }
-        
-        if (letter < 'A') {
-            letter = letter + 'Z' - 'A' + 1;
-        }
-        
-        cipher[i] = letter;
-        printf("%s\n", cipher);
     }
+    printf("%s", cipher);
 }
 
 void encryptSubCipher (char message[], char key[]) {
@@ -149,4 +127,4 @@ void decryptSubCipher (char cipher[], char key[]) {
     }       
     
     printf("%s", cipher);
-}
+} 
