@@ -13,14 +13,19 @@ void decryptSubCipherAdv(char cipher[]);
 int main() {
     
     char message[] = "THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG";
-    char key[] = "BADCFEHGJILKNMPOSQRVTUYZXW";
+//    char key[] = "BADCFEHGJILKNMPOSQRVTUYZXW";
+//    char cipher[] = "VGF STJDL AQPYM EPZ ITNOR PUFQ VGF KBWX CPH";
+    
+    int key = 3;
+    
+//    decryptSubCipher(cipher, key);
     
 //    char message[] = "ZFFU";
 //    char key[] = "WEET";
     
-    encryptSubCipher(message, key);
+//    encryptSubCipher(message, key);
 //    int key = 1;
-//    encryptRotationCipher(message, key);
+    encryptRotationCipher(message, key);
 //    decryptRotationCipher(message, key);
     
     return 0;
@@ -30,9 +35,9 @@ void encryptRotationCipher(char message[], int key) {
     int i;
     char letter;
     
-    while (key < 0) {
+    while (key < -26) {
         key += 26;
-    }   while (key >= 0) {
+    }   while (key >= 26) {
         key -= 26;
     }
         
@@ -106,7 +111,11 @@ void encryptSubCipher (char message[], char key[]) {
     
     for (i = 0 ; message[i] != '\0' ; i++) {
         
-        if (message[i] != ' ') {
+        if (message[i] >= 'a' && message[i] <= 'z') {
+            message[i] -= 32;
+        }
+
+        if (message[i] >= 'A' && message[i] <= 'Z') {
             finder = strchr(alphabet, message[i]);
             index = (int)(finder - alphabet);
             message[i] = key[index];
@@ -116,4 +125,28 @@ void encryptSubCipher (char message[], char key[]) {
     }
 
     printf("%s", message);
+}
+
+void decryptSubCipher (char cipher[], char key[]) {
+    
+    char alphabet[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    char *finder;
+    int index, i;
+    
+    for (i = 0 ; cipher[i] != '\0' ; i++) {
+        
+        if (cipher[i] >= 'a' && cipher[i] <= 'z') {
+                cipher[i] -= 32;
+        }
+       
+        if (cipher[i] >= 'A' && cipher[i] <= 'Z') {
+            finder = strchr(key, cipher[i]);
+            index = (int)(finder - key);
+            cipher[i] = alphabet[index];
+        } else {
+            // do nothing
+        }
+    }       
+    
+    printf("%s", cipher);
 }
