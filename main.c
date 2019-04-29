@@ -7,13 +7,20 @@ void decryptRotationCipher(char cipher[], int key);
 void encryptSubCipher(char message[], char substitution[]);
 void decryptSubCipher(char cipher[], char substitution[]);
 
-void decryptRotationCipherAdv(char cipher[]);
-void decryptSubCipherAdv(char cipher[]);
-
 int main() {
+    char message[] = "";
+    char keyCipher[] = "";
+    int key = 1;
+    
+    //encryptRotationCipher(message, key);
+    //decryptRotationCipher(message, key);    
+    //encryptSubCipher(message, keyCipher);
+    //decryptSubCipher(message, keyCipher);
+    
+    /* commented this out because it broke last minute so I'm just going to attempt hardcoded :(
     int selection, key;
-    char message[256];
-    char keyCipher[256];
+    char message[100];
+    char keyCipher[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     
     do {
         printf("Please make a selection: \n");
@@ -22,9 +29,7 @@ int main() {
         printf("Enter 3 for encryption using a substitution cipher\n");
         printf("Enter 4 for decryption using a substitution cipher\n");
         printf("Enter any other character to exit.\n");
-    
-    
-    scanf("%d", &selection);
+        scanf("%d", &selection);
         
         
         switch(selection) {
@@ -72,7 +77,9 @@ int main() {
                 break;
         }
     } while (selection >= 1 && selection <= 4);
-    
+    */ 
+   
+   
     return 0;
 }
 
