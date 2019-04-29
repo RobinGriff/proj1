@@ -11,17 +11,42 @@ void decryptRotationCipherAdv(char cipher[]);
 void decryptSubCipherAdv(char cipher[]);
 
 int main() {
+    int selection, key;
+    char message[256];
     
-    char cipher[] = "XYZ, ABC";
-//    char key[] = "BADCFEHGJILKNMPOSQRVTUYZXW";
-//    char cipher[] = "VGF STJDL AQPYM EPZ ITNOR PUFQ VGF KBWX CPH";
-    int key = 3;
+    printf("Please make a selection: \n");
+    printf("Enter 1 for encryption using a rotation cipher\n");
+    printf("Enter 2 for decryption using a rotation cipher\n");
+    printf("Enter 3 for encryption using a substitution cipher\n");
+    printf("Enter 4 for decryption using a substitution cipher\n");
+    printf("Enter any other character to exit.\n");
     
-//    decryptSubCipher(cipher, key);
-    
-//    encryptSubCipher(message, key);
-//   encryptRotationCipher(message, key);
-    decryptRotationCipher(cipher, key);
+    do {
+        scanf("%d", &selection);
+        
+        
+        switch(selection) {
+            case 1:
+                
+                printf("Please enter a message to encrypt: \n");
+                scanf("%s", message);
+                printf("%s", message);
+                printf("Please enter a key (integer) for rotation\n");
+                scanf("%d", key);
+                
+                encryptRotationCipher(message, key);
+                
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
+            case 4:
+                break;
+            default:
+                break;
+        }
+    } while (selection >= 1 && selection <= 4);
     
     return 0;
 }
@@ -58,7 +83,7 @@ void encryptRotationCipher(char message[], int key) {
         }
     }
     
-    printf("%s", message);  // prints the encrypted message
+    printf("Encrypted message: %s\n", message);  // prints the encrypted message
 }
 
 // The below function decrypts a cipher, input as a string,
@@ -92,7 +117,7 @@ void decryptRotationCipher (char cipher[], int key) {
             // does nothing, allowing the char to persist to the printed output
         }
     }
-    printf("%s", cipher);   // prints the decrypted message
+    printf("Decrypted message: %s\n", cipher);   // prints the decrypted message
 }
 
 // The below function encrypts a message, input as a string
@@ -127,7 +152,7 @@ void encryptSubCipher (char message[], char key[]) {
         }
     }
 
-    printf("%s", message);  // prints the encrypted message
+    printf("Encrypted message %s\n", message);  // prints the encrypted message
 }
 
 // The below function decrypts a cipher, input as a string
@@ -162,5 +187,5 @@ void decryptSubCipher (char cipher[], char key[]) {
         }
     }       
     
-    printf("%s", cipher);   // prints the decrypted message
+    printf("Decrypted message: %s\n", cipher);   // prints the decrypted message
 } 
