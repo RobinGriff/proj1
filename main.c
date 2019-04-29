@@ -13,36 +13,61 @@ void decryptSubCipherAdv(char cipher[]);
 int main() {
     int selection, key;
     char message[256];
-    
-    printf("Please make a selection: \n");
-    printf("Enter 1 for encryption using a rotation cipher\n");
-    printf("Enter 2 for decryption using a rotation cipher\n");
-    printf("Enter 3 for encryption using a substitution cipher\n");
-    printf("Enter 4 for decryption using a substitution cipher\n");
-    printf("Enter any other character to exit.\n");
+    char keyCipher[256];
     
     do {
-        scanf("%d", &selection);
+        printf("Please make a selection: \n");
+        printf("Enter 1 for encryption using a rotation cipher\n");
+        printf("Enter 2 for decryption using a rotation cipher\n");
+        printf("Enter 3 for encryption using a substitution cipher\n");
+        printf("Enter 4 for decryption using a substitution cipher\n");
+        printf("Enter any other character to exit.\n");
+    
+    
+    scanf("%d", &selection);
         
         
         switch(selection) {
             case 1:
-                
                 printf("Please enter a message to encrypt: \n");
                 scanf("%s", message);
-                printf("%s", message);
+                
                 printf("Please enter a key (integer) for rotation\n");
                 scanf("%d", key);
                 
                 encryptRotationCipher(message, key);
+                break;
                 
-                break;
             case 2:
+                printf("Please enter a message to decrypt: \n");
+                scanf("%s", message);
+                
+                printf("Please enter a key (integer) for rotation\n");
+                scanf("%d", key);
+                
+                decryptRotationCipher(message, key);
                 break;
+
             case 3:
+                printf("Please enter a message to encrypt: \n");
+                scanf("%s", message);
+                
+                printf("Please enter a key as 26 different uppercase alphabetical characters: \n");
+                scanf("%s", keyCipher);
+                
+                encryptSubCipher(message, keyCipher);
                 break;
+            
             case 4:
+                printf("Please enter a message to decrypt: \n");
+                scanf("%s", message);
+                
+                printf("Please enter a key as 26 different uppercase alphabetical characters: \n");
+                scanf("%s", keyCipher);
+                
+                decryptSubCipher(message, keyCipher);
                 break;
+                
             default:
                 break;
         }
