@@ -76,7 +76,7 @@ void decryptRotationCipher (char cipher[], int key) {
         key -= 26;          // equivalent to a rotation of 25 and so on.
     }
     
-    for (i = 0 ; cipher[i] != '\0' ; i++) {     // loops through each char contained within the message string
+    for (i = 0 ; cipher[i] != '\0' ; i++) {     // loops through each char contained within the cipher string
                                                 // until the \0 at the end of the string is reached.
         
         if (cipher[i] >= 'a' && cipher[i] <= 'z') {     // if the char is lowercase, converts char to uppercase
@@ -86,7 +86,7 @@ void decryptRotationCipher (char cipher[], int key) {
         if (cipher[i] >= 'A' && cipher[i] <= 'Z') {     // if the char is uppercase alphabetical, rotates the 
             cipher[i] -= key;                           // char value backwards by the input key value.
             if (cipher[i] < 'A') {                      // if the rotated char lies outside of the alphabetical ASCII
-                cipher[i] = cipher[i] + 'Z' - 'A' + 1;  // corrects the value by changing char value to start of alphabet
+                cipher[i] = cipher[i] + 'Z' - 'A' + 1;  // corrects the value by changing char value to end of alphabet
             }
         } else {    // if the input char lies outside of the uppercase alphabetical range
             // does nothing, allowing the char to persist to the printed output
@@ -95,50 +95,72 @@ void decryptRotationCipher (char cipher[], int key) {
     printf("%s", cipher);   // prints the decrypted message
 }
 
+// The below function encrypts a message, input as a string
+// by replacing each char with the corresponding char
+// of the given key, also input as a string of 26 different uppercase alphabetical char.
+// Any punctuation input into the function is ignored and will
+// persist through to the output, being a printed encrypted message.
+// Example "THE QUICK BROWN FOX" encrypted with the key "BADCFEHGJILKNMPOSQRVTUYZXW"
+// will print "VGF STJDL AQPYM EPZ".
+
 void encryptSubCipher (char message[], char key[]) {
     
-    char alphabet[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    char *finder;
+    const char alphabet[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"; // creates a string of the alphabet, used to find the index of chars
+    char *finder;                                   // creates a char pointer
     int index, i;
     
-    for (i = 0 ; message[i] != '\0' ; i++) {
+    for (i = 0 ; message[i] != '\0' ; i++) {        // loops through each char contained within the message string
+                                                    // until the \0 at the end of the string is reached.
         
-        if (message[i] >= 'a' && message[i] <= 'z') {
-            message[i] -= 32;
+        if (message[i] >= 'a' && message[i] <= 'z') {   // if the char is lowercase, converts char to uppercase
+            message[i] -= 32;                           // until the \0 at the end of the string is reached.
         }
 
-        if (message[i] >= 'A' && message[i] <= 'Z') {
-            finder = strchr(alphabet, message[i]);
-            index = (int)(finder - alphabet);
-            message[i] = key[index];
-        }   else {
-        // do nothing
+        if (message[i] >= 'A' && message[i] <= 'Z') {   // if the char is uppercase alphabetical,
+            finder = strchr(alphabet, message[i]);      // sets the char pointer to where the char is found in the alphabet.
+            index = (int)(finder - alphabet);           // sets index to the numerical index of the char, by casting the difference
+                                                        // between the characters first instance and the start of the alphabet to an int.
+            message[i] = key[index];                    // sets the char of the message to the corresponding char in the key string that
+                                                        // holds the same numerical index.
+        } else {  // if the input char lies outside of the uppercase alphabetical range
+        // does nothing, allowing the char to persist to the output.
         }
     }
 
-    printf("%s", message);
+    printf("%s", message);  // prints the encrypted message
 }
+
+// The below function decrypts a cipher, input as a string
+// by replacing each char with the corresponding char
+// of the given key, also input as a string of 26 different uppercase alphabetical char.
+// Any punctuation input into the function is ignored and will
+// persist through to the output, being a printed encrypted message.
+// Example "VGF STJDL AQPYM EPZ" decrypted with the key "BADCFEHGJILKNMPOSQRVTUYZXW"
+// will print "THE QUICK BROWN FOX".
 
 void decryptSubCipher (char cipher[], char key[]) {
     
-    char alphabet[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    char *finder;
+    const char alphabet[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"; // creates a string of the alphabet, used to find the index of chars
+    char *finder;                                   // creates a char pointer
     int index, i;
     
-    for (i = 0 ; cipher[i] != '\0' ; i++) {
+    for (i = 0 ; cipher[i] != '\0' ; i++) {         // loops through each char contained within the cipher string
+                                                    // until the \0 at the end of the string is reached.
         
-        if (cipher[i] >= 'a' && cipher[i] <= 'z') {
-                cipher[i] -= 32;
+        if (cipher[i] >= 'a' && cipher[i] <= 'z') {     // if the char is lowercase, converts char to uppercase
+                cipher[i] -= 32;                        // until the \0 at the end of the string is reached.
         }
        
-        if (cipher[i] >= 'A' && cipher[i] <= 'Z') {
-            finder = strchr(key, cipher[i]);
-            index = (int)(finder - key);
-            cipher[i] = alphabet[index];
-        } else {
-            // do nothing
+        if (cipher[i] >= 'A' && cipher[i] <= 'Z') {     // If the char is uppercase alphabetical,
+            finder = strchr(key, cipher[i]);            // Sets the char pointer to where the char is found in the key.
+            index = (int)(finder - key);                // Sets index to the numerical index of the char, by casting the difference
+                                                        // between the characters first instance and the start of the key to an int.
+            cipher[i] = alphabet[index];                // Sets the char of the message to the corresponding char in the alphabet string that
+                                                        // holds the same numerical index.
+        } else {    // if the input char lies outside of the uppercase alphabetical range         
+            // does nothing, allowing the char to persist to the output.
         }
     }       
     
-    printf("%s", cipher);
+    printf("%s", cipher);   // prints the decrypted message
 } 
