@@ -8,8 +8,8 @@ void encryptSubCipher(char message[], char substitution[]);
 void decryptSubCipher(char cipher[], char substitution[]);
 
 int main() {
-    char message[] = "";
-    char keyCipher[] = "";
+    char message[] = "NTTZ";
+    char keyCipher[] = "QWERTYUIOPASDFGHJKLZXCVBNM";
     int key = 1;
     
     //encryptRotationCipher(message, key);
